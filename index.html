@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Leasing Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Car Leasing Calculator</h1>
+        <div class="calculator">
+            <div class="left-column">
+                <div class="form-group">
+                    <label for="carType">Car Type:</label>
+                    <select id="carType" onchange="updateLeasingDetails()">
+                        <option value="brandNew">Brand New</option>
+                        <option value="used">Used</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="carValue">Car Value (€10,000 - €200,000):</label>
+                    <input type="number" id="carValue" value="120000" min="10000" max="200000" step="1000" oninput="updateCarValueInput(this.value)">
+                    <input type="range" id="carValueSlider" min="10000" max="200000" value="120000" step="1000" oninput="updateCarValue(this.value)">
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="form-group">
+                    <label for="leasePeriod">Lease Period (months):</label>
+                    <select id="leasePeriod">
+                        <option value="60">60</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="downPayment">Down Payment (10% - 50%):</label>
+                    <input type="number" id="downPayment" value="10" min="10" max="50" step="5" oninput="updateDownPaymentInput(this.value)">
+                    <input type="range" id="downPaymentSlider" min="10" max="50" value="10" step="5" oninput="updateDownPayment(this.value)">
+                </div>
+            </div>
+        </div>
+        <div class="horizontal-divider"></div>
+        <div class="leasing-details">
+            <div class="left-detail">
+                <p id="totalLeasingCost">Total Leasing Cost: €128408.32</p>
+                <p id="downPaymentAmount">Down Payment: €12000.00</p>
+            </div>
+            <div class="vertical-divider"></div>
+            <div class="right-detail">
+                <p id="monthlyInstallment">Monthly Installment: €1940.14</p>
+                <p id="interestRate">Interest Rate: 2.99%</p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -10,14 +10,13 @@ const downPaymentMax = 50;
 function updateCarValue(value) {
     value = validateCarValue(value);
     document.getElementById('carValue').value = value;
+    document.getElementById('carValueSlider').value = value; // Update slider value
     updateLeasingDetails();
 }
 
 function updateCarValueInput(value) {
-    value = validateCarValue(value);
     const slider = document.getElementById('carValueSlider');
-    slider.value = value;
-    document.getElementById('carValue').value = value;
+    slider.value = validateCarValue(value);
     updateLeasingDetails();
 }
 
@@ -36,20 +35,41 @@ function updateDownPaymentInput(value) {
 }
 
 function validateCarValue(value) {
+    if (!value || isNaN(value)) return carValueMin; // Handle invalid input
+    value = parseFloat(value);
     if (value < carValueMin) return carValueMin;
     if (value > carValueMax) return carValueMax;
     return value;
 }
 
+function validateAndSetCarValue(input) {
+    const value = validateCarValue(input.value);
+    input.value = value;
+    document.getElementById('carValueSlider').value = value;
+    updateLeasingDetails();
+}
+
 function validateDownPayment(value) {
-    value = Math.round(value / 5) * 5;
+    value = Math.round(value / 5) * 5; 
     if (value < downPaymentMin) return downPaymentMin;
     if (value > downPaymentMax) return downPaymentMax;
     return value;
 }
 
 function updateLeasingDetails() {
-    const carValue = parseFloat(document.getElementById('carValue').value);
+    const carValueElement = document.getElementById('carValue');
+    const carValue = parseFloat(carValueElement.value);
+    const errorMessage = document.getElementById('errorMessage');
+    
+    if (carValue < carValueMin || carValue > carValueMax || !carValueElement.value) {
+        errorMessage.style.display = 'block';
+        clearResults();
+        document.getElementById('carValueSlider').value = carValueMin; // Reset slider to minimum value
+        return;
+    } else {
+        errorMessage.style.display = 'none';
+    }
+
     const downPaymentPercentage = parseFloat(document.getElementById('downPayment').value);
     const leasePeriod = parseInt(document.getElementById('leasePeriod').value);
     const carType = document.getElementById('carType').value;
@@ -70,4 +90,13 @@ function updateLeasingDetails() {
     document.getElementById('interestRate').textContent = `Interest Rate: ${(interestRate * 100).toFixed(2)}%`;
 }
 
-updateLeasingDetails();
+function clearResults() {
+    document.getElementById('totalLeasingCost').textContent = '';
+    document.getElementById('downPaymentAmount').textContent = '';
+    document.getElementById('monthlyInstallment').textContent = '';
+    document.getElementById('interestRate').textContent = '';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateLeasingDetails();
+});

@@ -8,3 +8,4 @@ This project is a web-based car leasing calculator that allows users to calculat
 * Input car value and down payment using both number input fields and sliders.
 * Dynamically updates leasing details as inputs change.
 * Responsive design for a seamless experience on both desktop and mobile devices.
+* Input validation.

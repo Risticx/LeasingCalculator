@@ -20,20 +20,24 @@
                 </div>
                 <div class="form-group">
                     <label for="carValue">Car Value (€10,000 - €200,000):</label>
-                    <input type="number" id="carValue" value="120000" min="10000" max="200000" step="1000" oninput="updateCarValueInput(this.value)">
+                    <input type="number" id="carValue" value="120000" min="10000" max="200000" step="1000" oninput="updateCarValueInput(this.value)" onblur="validateAndSetCarValue(this)">
                     <input type="range" id="carValueSlider" min="10000" max="200000" value="120000" step="1000" oninput="updateCarValue(this.value)">
                 </div>
             </div>
             <div class="right-column">
                 <div class="form-group">
                     <label for="leasePeriod">Lease Period (months):</label>
-                    <select id="leasePeriod">
+                    <select id="leasePeriod" onchange="updateLeasingDetails()">
+                        <option value="12">12</option>
+                        <option value="24">24</option>
+                        <option value="36">36</option>
+                        <option value="48">48</option>
                         <option value="60">60</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="downPayment">Down Payment (10% - 50%):</label>
-                    <input type="number" id="downPayment" value="10" min="10" max="50" step="5" oninput="updateDownPaymentInput(this.value)">
+                    <input type="number" id="downPayment" value="10" min="10" max="50" step="5" oninput="updateDownPaymentInput(this.value)" onkeydown="return false">
                     <input type="range" id="downPaymentSlider" min="10" max="50" value="10" step="5" oninput="updateDownPayment(this.value)">
                 </div>
             </div>
@@ -44,7 +48,10 @@
                 <p id="totalLeasingCost">Total Leasing Cost: €128408.32</p>
                 <p id="downPaymentAmount">Down Payment: €12000.00</p>
             </div>
-            <div class="vertical-divider"></div>
+            <div>
+                <div class="error-message" id="errorMessage" style="color: red; display: none; font-weight: bold;">Car value is not valid!</div>
+            </div>
+            
             <div class="right-detail">
                 <p id="monthlyInstallment">Monthly Installment: €1940.14</p>
                 <p id="interestRate">Interest Rate: 2.99%</p>

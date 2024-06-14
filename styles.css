@@ -84,6 +84,11 @@ input[type="range"] {
     background-color: #ccc;
 }
 
+.error-message {
+    text-align: center;
+}
+
+
 .leasing-details p {
     margin: 8px 0;
     font-weight: bold;
@@ -106,10 +111,6 @@ input[type="range"] {
     .leasing-details {
         flex-direction: column;
         align-items: flex-start;
-    }
-
-    .vertical-divider {
-        display: none;
     }
 
     h1 {
